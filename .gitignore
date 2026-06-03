@@ -1,0 +1,25 @@
+# 1. Bỏ qua các file biên dịch và file sinh ra từ C++
+*.o
+*.out
+*.exe
+build/
+
+# 2. Bỏ qua các cấu hình của IDE/Editor (không bắt buộc người khác dùng chung IDE với mình)
+.vscode/
+.idea/
+
+# 3. Bỏ qua các file môi trường và file tạm của Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# 4. Bỏ qua dữ liệu lớn
+# Lưu ý: Cú pháp này sẽ bỏ qua toàn bộ file .wav trong thư mục audio
+data/audio/*.wav
+data/images/*.jpg
+data/images/*.png
+
+# 5. Bỏ qua file rác của Hệ điều hành
+.DS_Store    # Nếu bạn hoặc ai đó dùng macOS
+Thumbs.db    # File sinh ra từ Windows
