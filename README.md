@@ -1,4 +1,4 @@
-# FFT and Applications
+# CS14007: FFT and Applications
 
 A comprehensive framework focused on the Fast Fourier Transform (FFT), Number Theoretic Transform (NTT), and Chirp-Z Transform (CZT) optimized for performance using C++ (Core Engine), alongside practical 1D/2D Digital Signal Processing (DSP) applications implemented in Python.
 
