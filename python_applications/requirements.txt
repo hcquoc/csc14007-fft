@@ -1,0 +1,6 @@
+numpy 
+matplotlib 
+librosa 
+soundfile
+opencv-python 
+scikit-image
