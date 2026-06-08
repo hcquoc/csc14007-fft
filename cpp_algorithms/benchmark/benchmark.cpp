@@ -43,8 +43,8 @@ int main() {
          << left << setw(15) << "Naive (ms)" 
          << left << setw(18) << "Karatsuba (ms)" 
          << left << setw(16) << "Chirp-Z (ms)"
-         << left << setw(14) << "FFT (ms)"
-         << left << setw(14) << "NTT (ms)" << "\n";
+         << left << setw(16) << "FFT Mult (ms)"
+         << left << setw(14) << "NTT (*) (ms)" << "\n";
     cout << "-----------------------------------------------------------------------------------------\n";
 
     vector<int> pow2_sizes = {1024, 4096, 16384, 65536, 262144};
@@ -78,13 +78,13 @@ int main() {
         auto res_czt = chirp_z(data_czt);
         cout << left << setw(16) << duration_cast<microseconds>(high_resolution_clock::now() - start_czt).count() / 1000.0;
 
-        // 4. FFT
-        auto data_fft = generate_random_complex(n);
+        // 4. FFT 
+        auto a_fft = generate_random_complex(n); vector<cd> b_fft = generate_random_complex(n);
         auto start_fft = high_resolution_clock::now();
-        fft(data_fft, false);
-        cout << left << setw(14) << duration_cast<microseconds>(high_resolution_clock::now() - start_fft).count() / 1000.0;
+        auto res_fft = multiply_fft(a_fft, b_fft);
+        cout << left << setw(16) << duration_cast<microseconds>(high_resolution_clock::now() - start_fft).count() / 1000.0;
 
-        // 5. NTT
+        // 5. NTT 
         auto data_ntt = generate_random_integer(n);
         auto start_ntt = high_resolution_clock::now();
         ntt(data_ntt, false);
@@ -94,21 +94,22 @@ int main() {
 
 
     // =========================================================================================
-    // BẢNG 2: KÍCH THƯỚC KHÔNG PHẢI LŨY THỪA CỦA 2 (SO SÁNH 3 THUẬT TOÁN)
+    // BẢNG 2: KÍCH THƯỚC KHÔNG PHẢI LŨY THỪA CỦA 2 (ĐÃ MỞ RỘNG THÊM FFT MULTIPLY)
     // =========================================================================================
-    cout << "=====================================================================\n";
-    cout << "       TABLE 2: PERFORMANCE MATRIX FOR NON-POWER-OF-TWO SIZES        \n";
-    cout << "=====================================================================\n";
-    cout << left << setw(12) << "Size (N)" 
+    cout << "=========================================================================================\n";
+    cout << "             TABLE 2: PERFORMANCE MATRIX FOR NON-POWER-OF-TWO SIZES                      \n";
+    cout << "=========================================================================================\n";
+    cout << left << setw(10) << "Size (N)" 
          << left << setw(15) << "Naive (ms)" 
          << left << setw(18) << "Karatsuba (ms)" 
-         << left << setw(16) << "Chirp-Z (ms)" << "\n";
-    cout << "---------------------------------------------------------------------\n";
+         << left << setw(16) << "Chirp-Z (ms)"
+         << left << setw(16) << "FFT Mult (ms)" << "\n";
+    cout << "-----------------------------------------------------------------------------------------\n";
 
     vector<int> non_pow2_sizes = {1500, 5000, 12000, 55000, 200000};
 
     for (int n : non_pow2_sizes) {
-        cout << left << setw(12) << n;
+        cout << left << setw(10) << n;
 
         // 1. Naive
         if (n <= 55000) {
@@ -134,9 +135,15 @@ int main() {
         auto data_czt = generate_random_complex(n);
         auto start_czt = high_resolution_clock::now();
         auto res_czt = chirp_z(data_czt);
-        cout << left << setw(16) << duration_cast<microseconds>(high_resolution_clock::now() - start_czt).count() / 1000.0 << "\n";
+        cout << left << setw(16) << duration_cast<microseconds>(high_resolution_clock::now() - start_czt).count() / 1000.0;
+
+        // 4. FFT 
+        auto a_fft = generate_random_complex(n); vector<cd> b_fft = generate_random_complex(n);
+        auto start_fft = high_resolution_clock::now();
+        auto res_fft = multiply_fft(a_fft, b_fft);
+        cout << left << setw(16) << duration_cast<microseconds>(high_resolution_clock::now() - start_fft).count() / 1000.0 << "\n";
     }
-    cout << "=====================================================================\n";
+    cout << "=========================================================================================\n";
 
     return 0;
 }
