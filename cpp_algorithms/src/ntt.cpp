@@ -51,3 +51,35 @@ void ntt(std::vector<long long>& a, bool invert) {
         }
     }
 }
+
+std::vector<long long> multiply_ntt(std::vector<long long> a, const std::vector<long long>& b) {
+    if (a.empty() || b.empty()) return {};
+
+    int exact_size = a.size() + b.size() - 1;
+    
+    int n = 1;
+    while (n < exact_size) {
+        n <<= 1;
+    }
+    
+    a.resize(n, 0);
+    std::vector<long long> b_copy = b;
+    b_copy.resize(n, 0);
+    
+    ntt(a, false);
+    ntt(b_copy, false);
+    
+    for (int i = 0; i < n; i++) {
+        a[i] = (a[i] * b_copy[i]) % MOD;
+    }
+    
+    ntt(a, true);
+    
+    a.resize(exact_size);
+    
+    while (a.size() > 1 && a.back() == 0) {
+        a.pop_back();
+    }
+    
+    return a;
+}
