@@ -17,7 +17,7 @@ env/
 # 4. Bỏ qua dữ liệu lớn
 # Lưu ý: Cú pháp này sẽ bỏ qua toàn bộ file .wav trong thư mục audio
 data/audio/*.wav
-date/audio/*.mp3
+data/audio/*.mp3
 data/images/*.jpg
 data/images/*.png
 
