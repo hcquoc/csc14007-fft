@@ -60,14 +60,14 @@ int main() {
         }
 
         // 2. Karatsuba
-        if (n <= 524288) {
-            auto a = generate_random_real(n); vector<cd> b = generate_random_real(n);
-            auto start = high_resolution_clock::now();
-            auto res = karatsuba_multiply(a, b);
-            cout << left << setw(18) << duration_cast<microseconds>(high_resolution_clock::now() - start).count() / 1000.0;
-        } else {
-            cout << left << setw(18) << "Skip (>524k)";
-        }
+        // if (n <= 524288) {
+        auto a = generate_random_real(n); vector<cd> b = generate_random_real(n);
+        auto start = high_resolution_clock::now();
+        auto res = karatsuba_multiply(a, b);
+        cout << left << setw(18) << duration_cast<microseconds>(high_resolution_clock::now() - start).count() / 1000.0;
+        // } else {
+        //     cout << left << setw(18) << "Skip (>524k)";
+        // }
 
         // 3. Chirp-Z
         auto data_czt = generate_random_real(n);
@@ -108,14 +108,14 @@ int main() {
         }
 
         // 2. Karatsuba
-        if (n <= 5000000) {
-            auto a = generate_random_real(n); vector<cd> b = generate_random_real(n);
-            auto start = high_resolution_clock::now();
-            auto res = karatsuba_multiply(a, b);
-            cout << left << setw(18) << duration_cast<microseconds>(high_resolution_clock::now() - start).count() / 1000.0;
-        } else {
-            cout << left << setw(18) << "Skip (>500k)";
-        }
+        // if (n <= 5000000) {
+        auto a = generate_random_real(n); vector<cd> b = generate_random_real(n);
+        auto start = high_resolution_clock::now();
+        auto res = karatsuba_multiply(a, b);
+        cout << left << setw(18) << duration_cast<microseconds>(high_resolution_clock::now() - start).count() / 1000.0;
+        // } else {
+        //     cout << left << setw(18) << "Skip (>500k)";
+        // }
 
         // 3. Chirp-Z
         auto data_czt = generate_random_real(n);
